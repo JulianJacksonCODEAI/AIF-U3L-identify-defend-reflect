@@ -160,6 +160,7 @@ button:disabled {
 
 /* Two rows on every screen, so the header and content don't move between the dashboard and threat screens. */
 .tool-nav {
+  order: -1;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
