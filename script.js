@@ -1009,14 +1009,28 @@ function nextStepButton(label) {
   });
 }
 
+const LEARN_ROWS = [
+  { label: 'What it is', icon: 'threat' },
+  { label: 'How it works', icon: 'unlock' },
+  { label: 'Why it’s risky', icon: 'alert' }
+];
+
 function renderLearn(threat, fx) {
   const severity = SEVERITY[threat.id];
   main.appendChild(el('div', { className: 'split learn' }, [
     el('section',{ className: 'panel learn-text pageable', 'aria-labelledby': 'learn-heading' }, [
       el('p', { className: `threat-level severity-${severity.id}` }, [icon('alert', 'threat-level-icon'), `Threat level: ${severity.label}`]),
       el('h2', { id: 'learn-heading', className: 'learn-heading', text: 'About this threat' })
-    ].concat(threat.learn.map(function (para) {
-      return el('p', { text: para });
+    ].concat(threat.learn.map(function (para, i) {
+      // Each Learn line has the same job across threats: what it is, how it works, why it's risky.
+      const row = LEARN_ROWS[i] || LEARN_ROWS[LEARN_ROWS.length - 1];
+      return el('div', { className: 'learn-row' }, [
+        el('span', { className: 'learn-row-icon' }, [icon(row.icon === 'threat' ? threat.icon : row.icon)]),
+        el('div', null, [
+          el('h3', { className: 'learn-row-label', text: row.label }),
+          el('p', { text: para })
+        ])
+      ]);
     })).concat([
       button('Investigate the threat', function () { goTo(threat.id, 'investigate'); }, {
         className: 'btn btn-primary',
