@@ -1,9 +1,9 @@
 'use strict';
 
 const VIEWS = [
-  { id: 'learn', label: 'Learn more about the threat', icon: 'alert' },
-  { id: 'investigate', label: 'Investigate the threat', icon: 'search' },
-  { id: 'mitigation', label: 'Mitigation', icon: 'shield' }
+  { id: 'learn', label: 'Learn', icon: 'alert' },
+  { id: 'investigate', label: 'Investigate', icon: 'search' },
+  { id: 'mitigation', label: 'Defend', icon: 'shield' }
 ];
 
 const STATUS_LABELS = {
@@ -27,7 +27,7 @@ const THREATS = [
       'To prevent phishing, organizations must invest in employee training, strong security policies, and advanced email filtering systems to detect and block malicious messages.'
     ],
     defense: {
-      title: 'Mitigating Phishing Attacks',
+      title: 'Defend against phishing attacks',
       question: 'Which of the following security measures is the most effective defense against phishing?',
       options: [
         {
@@ -80,7 +80,7 @@ const THREATS = [
       'To prevent this, companies should require strong, unique passwords, enable multi-factor authentication, and use password management tools.'
     ],
     defense: {
-      title: 'Mitigating Password Attacks',
+      title: 'Defend against password attacks',
       question: 'Which of the following security measures is the most effective defense against weak passwords?',
       options: [
         {
@@ -133,7 +133,7 @@ const THREATS = [
       'To prevent this, organizations should change default credentials immediately, enforce strong password policies, and regularly audit all connected devices to ensure they remain secure.'
     ],
     defense: {
-      title: 'Mitigating Default Credentials',
+      title: 'Defend against default credentials',
       question: 'Which of the following security measures is the most effective defense against default credentials?',
       options: [
         {
@@ -185,7 +185,7 @@ const THREATS = [
       'The consequences can include data breaches, financial fraud, and identity theft. To prevent them, organizations must enforce employee training, strict verification policies, and multi-layered security controls.'
     ],
     defense: {
-      title: 'Mitigating Social Engineering',
+      title: 'Defend against social engineering',
       question: 'Which of the following security measures is the most effective defense against social engineering?',
       options: [
         {
@@ -537,7 +537,7 @@ const state = {
 };
 
 THREATS.forEach(function (threat) {
-  state.progress[threat.id] = { investigated: false, defended: false };
+  state.progress[threat.id] = { learned: false, investigated: false, defended: false };
 });
 
 const main = document.getElementById('main');
@@ -819,7 +819,7 @@ function updateIntegrity() {
   }
   integrity.className = `integrity integrity-${tone}`;
   integrityValue.textContent = PERCENT.format(ratio);
-  integrityFill.style.width = `${ratio * 100}%`;
+  integrityFill.style.transform = `scaleX(${ratio})`;
   integrityStatus.textContent = status;
 }
 
@@ -912,12 +912,6 @@ function renderDashboard() {
               ])
             ])
           ]
-        }),
-        button('Mitigation', function () { goTo(threat.id, 'mitigation'); }, {
-          className: 'mitigation-btn',
-          key: `mitigate-${threat.id}`,
-          ariaLabel: `Mitigation for ${threat.name}`,
-          children: [icon(status === 'defended' ? 'check' : 'shield', 'mitigation-icon'), 'Mitigation']
         })
       ]);
     }))
@@ -931,26 +925,60 @@ function renderDashboard() {
 
 /* Threat screens */
 
+function stepState(viewId, progress) {
+  const done = {
+    learn: progress.learned || progress.investigated,
+    investigate: progress.investigated,
+    mitigation: progress.defended
+  };
+  if (done[viewId]) return 'done';
+  if (viewId === 'mitigation' && !progress.investigated) return 'locked';
+  return 'open';
+}
+
+function stepAriaLabel(view, number, stepStatus) {
+  if (stepStatus === 'done') return `Step ${number}: ${view.label}, completed`;
+  if (stepStatus === 'locked') return `Step ${number}: ${view.label}, unlocks after you finish investigating`;
+  return `Step ${number}: ${view.label}`;
+}
+
 function renderToolNav() {
   toolNav.hidden = false;
-  VIEWS.forEach(function (view) {
-    toolNav.appendChild(el('button', {
-      type: 'button',
-      className: 'tool-btn',
-      'data-key': `nav-${view.id}`,
-      'aria-current': state.view === view.id ? 'page' : null,
-      onClick: function () { goTo(state.threatId, view.id); }
-    }, [iconBox(view.icon), el('span', { className: 'tool-label', text: view.label })]));
-  });
+  const progress = state.progress[state.threatId];
+
   toolNav.appendChild(el('button', {
     type: 'button',
-    className: 'tool-btn',
+    className: 'tool-btn tool-btn-home',
     'data-key': 'nav-dashboard',
     onClick: function () { goTo(null); }
-  }, [iconBox('dashboard'), el('span', { className: 'tool-label', text: 'Return to the security dashboard' })]));
+  }, [iconBox('dashboard'), el('span', { className: 'tool-label', text: 'Dashboard' })]));
+
+  const steps = el('ol', { className: 'nav-steps' }, VIEWS.map(function (view, index) {
+    const number = index + 1;
+    const stepStatus = stepState(view.id, progress);
+    const isCurrent = state.view === view.id;
+    const marker = isCurrent ? String(number)
+      : stepStatus === 'done' ? icon('check', 'nav-step-icon')
+      : stepStatus === 'locked' ? icon('lock', 'nav-step-icon')
+      : String(number);
+    return el('li', {}, [el('button', {
+      type: 'button',
+      className: classes('tool-btn', 'nav-step', `nav-step-${stepStatus}`),
+      'data-key': `nav-${view.id}`,
+      'aria-current': isCurrent ? 'step' : null,
+      'aria-label': stepAriaLabel(view, number, stepStatus),
+      disabled: stepStatus === 'locked',
+      onClick: function () { goTo(state.threatId, view.id); }
+    }, [
+      el('span', { className: 'nav-step-mark', 'aria-hidden': 'true' }, [marker]),
+      el('span', { className: 'tool-label', 'aria-hidden': 'true', text: view.label })
+    ])]);
+  }));
+  toolNav.appendChild(steps);
 }
 
 function renderThreat(threat, fx) {
+  if (state.view === 'learn') state.progress[threat.id].learned = true;
   renderToolNav();
   const titles = {
     learn: threat.name,
