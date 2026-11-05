@@ -712,7 +712,7 @@ button:disabled {
 
 .dashboard-body {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
   align-items: center;
   gap: clamp(12px, 2vw, 24px);
 }

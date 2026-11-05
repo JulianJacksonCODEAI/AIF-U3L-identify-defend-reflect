@@ -919,7 +919,7 @@ function renderDashboard() {
 
   main.appendChild(el('div', { className: 'dashboard' }, [
     welcome,
-    el('div', { className: 'dashboard-body' }, [map, alerts])
+    el('div', { className: 'dashboard-body' }, [alerts, map])
   ]));
 }
 
