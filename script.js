@@ -21,22 +21,20 @@ const THREATS = [
     image: 'learn-phishing.jpg',
     imageAlt: 'A fishing hook pulls a card out of an email on a laptop while a surprised worker watches.',
     learn: [
-      'Phishing is a cyber attack where criminals impersonate trusted organizations to trick people into revealing sensitive information, such as passwords or financial details.',
-      'Attackers often use urgent language and deceptive links to make victims act quickly without thinking critically.',
-      'The social consequences of phishing can be severe, leading to identity theft, financial loss, and reputational damage for both individuals and companies. Phishing is also an ethical issue as it can be used for fraud, corporate espionage, or even national security threats.',
-      'To prevent phishing, organizations must invest in employee training, strong security policies, and advanced email filtering systems to detect and block malicious messages.'
+      'Phishing is a cyberattack where criminals pretend to be a trusted group. They trick people into giving up passwords, money or private information.',
+      'Phishing messages usually push you to act fast. They use urgent warnings and links to fake login pages.',
+      'One click can lead to stolen identities, lost money and data breaches, when private data gets out, that hurt both people and companies.'
     ],
     defense: {
       title: 'Defend against phishing attacks',
-      question: 'Which of the following security measures is the most effective defense against phishing?',
+      question: 'Which security measure is the best defense against phishing?',
       options: [
         {
           label: 'Two-Factor Authentication',
           correct: false,
           sections: [
-            { heading: 'What it does', text: 'Adds an extra layer of protection by requiring a second form of verification (e.g., a phone code) when logging in.' },
-            { heading: 'When it is useful', text: 'Protects accounts from being accessed even if an attacker steals a password.' },
-            { heading: 'Why it’s not the best choice', text: 'It protects an account after a password is stolen, but it does not stop an employee from being tricked by a phishing email.' }
+            { heading: 'What it does', text: 'Asks for a second check, like a code sent to your phone, when you log in.' },
+            { heading: 'Why it’s not the best choice', text: 'It protects an account after a password is stolen, but it doesn’t stop someone from being tricked by the email.' }
           ]
         },
         {
@@ -46,10 +44,9 @@ const THREATS = [
             {
               heading: 'Why?',
               list: [
-                'Employees learn to recognize phishing attempts and avoid clicking malicious links.',
-                'Cybercriminals rely on deception—training helps users identify warning signs before falling for a scam.',
-                'A well-trained workforce can report phishing attempts, stopping attacks before they spread.',
-                'Phishing is a social engineering attack, so awareness and vigilance are the best defense.'
+                'Training teaches employees to spot warning signs like fake senders, urgent language and suspicious links.',
+                'Trained employees report phishing emails, which stops attacks before they spread.',
+                'Phishing tricks people, not computers, so people are the best defense.'
               ]
             }
           ]
@@ -58,9 +55,8 @@ const THREATS = [
           label: 'Firewall',
           correct: false,
           sections: [
-            { heading: 'What it does', text: 'Blocks unauthorized access to a network by filtering incoming and outgoing traffic.' },
-            { heading: 'When it is useful', text: 'Protects against external hacking attempts, malware, and unauthorized remote access.' },
-            { heading: 'Why it’s not the best choice', text: 'A firewall cannot stop an employee from trusting a convincing email and clicking its link.' }
+            { heading: 'What it does', text: 'Blocks unwanted connections between a network and the internet.' },
+            { heading: 'Why it’s not the best choice', text: 'A firewall can’t stop an employee from trusting a convincing email and clicking its link.' }
           ]
         }
       ]
@@ -74,22 +70,20 @@ const THREATS = [
     image: 'learn-passwords.jpg',
     imageAlt: 'A hooded attacker on a ladder reaches for an open padlock on a laptop login screen next to a broken shield.',
     learn: [
-      'Weak passwords make it easy for attackers to gain access to accounts and sensitive data. Common risks include short, predictable, or reused passwords.',
-      'Attackers use automated tools to guess weak passwords in seconds. Once compromised, they can steal data, access company systems, or launch further attacks.',
-      'The consequences can include data breaches, financial loss, and identity theft. Organizations that fail to enforce strong passwords put employees and customers at risk.',
-      'To prevent this, companies should require strong, unique passwords, enable multi-factor authentication, and use password management tools.'
+      'Weak passwords are short, easy to guess or reused on many accounts. They make it easy for attackers to break in and steal data.',
+      'Attackers use automated tools that can try thousands of guesses per second. Once inside, they can steal data or use the account to attack other systems.',
+      'One weak password can lead to a data breach that puts employees and customers at risk.'
     ],
     defense: {
       title: 'Defend against password attacks',
-      question: 'Which of the following security measures is the most effective defense against weak passwords?',
+      question: 'Which security measure is the best defense against weak passwords?',
       options: [
         {
           label: 'Regular Software Updates',
           correct: false,
           sections: [
-            { heading: 'What it does', text: 'Fixes known vulnerabilities in operating systems, applications, and network software.' },
-            { heading: 'When it is useful', text: 'Prevents attackers from exploiting outdated software to gain access to systems.' },
-            { heading: 'Why it’s not the best choice', text: 'Attackers can still crack simple, predictable passwords, even on fully patched systems.' }
+            { heading: 'What it does', text: 'Fixes known security holes in software.' },
+            { heading: 'Why it’s not the best choice', text: 'Attackers can still guess simple passwords, even on fully updated systems.' }
           ]
         },
         {
@@ -99,10 +93,9 @@ const THREATS = [
             {
               heading: 'Why?',
               list: [
-                'A strong password policy ensures that employees use complex, unique passwords and update them regularly so that they are difficult to guess.',
-                'It prevents attackers from using brute force or dictionary attacks.',
-                'Employees are less likely to reuse weak passwords across multiple accounts.',
-                'Weak passwords are one of the most common entry points for cyber attacks—requiring strong ones is a critical security measure.'
+                'It requires long, unique passwords that are hard to guess.',
+                'It blocks dictionary and brute force attacks, which depend on short or common passwords.',
+                'It stops employees from reusing one weak password across many accounts.'
               ]
             }
           ]
@@ -111,9 +104,8 @@ const THREATS = [
           label: 'Password Management Tools',
           correct: false,
           sections: [
-            { heading: 'What it does', text: 'Securely generates, stores, and auto-fills complex passwords for users.' },
-            { heading: 'When it is useful', text: 'Helps users avoid weak or reused passwords across multiple accounts.' },
-            { heading: 'Why it’s not the best choice', text: 'If employees still create weak passwords, the organization remains vulnerable.' }
+            { heading: 'What it does', text: 'Creates, stores and fills in complex passwords for you.' },
+            { heading: 'Why it’s not the best choice', text: 'It only helps if people use it. Without a policy, employees can still pick weak passwords.' }
           ]
         }
       ]
@@ -127,31 +119,28 @@ const THREATS = [
     image: 'learn-credentials.jpg',
     imageAlt: 'An attacker reaches through an office window toward an unlocked router connected to a camera, a thermostat and a laptop.',
     learn: [
-      'Default credentials pose a major security risk because they are pre-set usernames and passwords that come with devices and software. Many users fail to change them, leaving systems vulnerable to attack.',
-      'Cybercriminals can easily find default credentials online and use them to access routers, security cameras, and other IoT devices without needing to crack a password. Once inside, attackers can steal data, take control of systems, or launch further attacks.',
-      'Leaving default credentials unchanged can lead to unauthorized surveillance, network breaches, and system manipulation.',
-      'To prevent this, organizations should change default credentials immediately, enforce strong password policies, and regularly audit all connected devices to ensure they remain secure.'
+      'Default credentials are the usernames and passwords that come preset on devices like routers and cameras. Many people leave them as they came.',
+      'Attackers find these defaults online. They can log in to Internet of Things (IoT) devices, everyday devices connected to the internet, without any hacking.',
+      'Once inside, attackers can spy through cameras, take control of systems or move deeper into the network.'
     ],
     defense: {
       title: 'Defend against default credentials',
-      question: 'Which of the following security measures is the most effective defense against default credentials?',
+      question: 'Which security measure is the best defense against default credentials?',
       options: [
         {
           label: 'Encrypted Data',
           correct: false,
           sections: [
-            { heading: 'What it does', text: 'Protects sensitive data by converting it into a secure format that can only be accessed with the correct encryption key.' },
-            { heading: 'When it is useful', text: 'Prevents eavesdropping on data in transit (e.g., securing communications between devices).' },
-            { heading: 'Why it’s not the best choice', text: 'Encryption secures data but does not prevent unauthorized access to a device if default credentials are still in use.' }
+            { heading: 'What it does', text: 'Scrambles data so only someone with the right key can read it.' },
+            { heading: 'Why it’s not the best choice', text: 'Encryption protects data, but anyone who logs in with the default password still gets full access to the device.' }
           ]
         },
         {
           label: 'Regular Software Updates',
           correct: false,
           sections: [
-            { heading: 'What it does', text: 'Fixes known vulnerabilities in operating systems, applications, and IoT device firmware.' },
-            { heading: 'When it is useful', text: 'Prevents attackers from exploiting outdated software to gain access to systems.' },
-            { heading: 'Why it’s not the best choice', text: 'While keeping software updated is critical, it does not change weak login credentials, leaving devices open to attack.' }
+            { heading: 'What it does', text: 'Fixes known security holes in software and in the code inside devices.' },
+            { heading: 'Why it’s not the best choice', text: 'Updates don’t change the login, so a device with a default password is still open.' }
           ]
         },
         {
@@ -161,10 +150,9 @@ const THREATS = [
             {
               heading: 'Why?',
               list: [
-                'Default usernames and passwords are publicly known and easily exploited by attackers.',
-                'Changing default credentials ensures each device has a unique, strong password, making unauthorized access much more difficult.',
-                'Many cyber attacks, including large-scale botnet attacks, start by scanning for devices with unchanged factory credentials—changing them eliminates this risk.',
-                'A strong device authentication policy is a fundamental security measure for any business network.'
+                'Default usernames and passwords are public, so anyone can look them up.',
+                'A unique, strong password on every device blocks these easy logins.',
+                'Many large attacks start by scanning the internet for devices that still use factory passwords.'
               ]
             }
           ]
@@ -180,13 +168,13 @@ const THREATS = [
     image: 'learn-social.jpg',
     imageAlt: 'A large gloved hand controls an office worker with puppet strings while a smiling speech bubble hides a fishing hook.',
     learn: [
-      'Social engineering attacks manipulate human trust to steal sensitive information or gain access to systems. Attackers use deception, urgency, and impersonation to trick victims into revealing passwords, clicking malicious links, or granting unauthorized access.',
-      'Common tactics include phishing emails, fake IT support calls, tailgating, and baiting (USB drops). These attacks bypass traditional security by exploiting human behavior.',
-      'The consequences can include data breaches, financial fraud, and identity theft. To prevent them, organizations must enforce employee training, strict verification policies, and multi-layered security controls.'
+      'Social engineering attacks trick people instead of computers. Attackers use trust, fear, urgency or curiosity to get someone to share a password or let them in.',
+      'Common tactics include phishing emails and fake IT support calls (pretexting). Others are following someone through a locked door (tailgating) and leaving infected USB drives for people to find (baiting).',
+      'Because these attacks target human behavior, they can get past technical defenses, like software that blocks outside access.'
     ],
     defense: {
       title: 'Defend against social engineering',
-      question: 'Which of the following security measures is the most effective defense against social engineering?',
+      question: 'Which security measure is the best defense against social engineering?',
       options: [
         {
           label: 'Security Awareness Training',
@@ -195,10 +183,9 @@ const THREATS = [
             {
               heading: 'Why?',
               list: [
-                'Social engineering attacks exploit human psychology, not technical vulnerabilities.',
-                'Regular training helps employees recognize phishing, pretexting, baiting, and tailgating attempts before they succeed.',
-                'Well-trained employees question suspicious requests, verify identities, and report potential attacks.',
-                'A strong security awareness program is the first line of defense against social engineering tactics.'
+                'Social engineering targets people, not technology.',
+                'Training helps employees recognize phishing, pretexting, baiting and tailgating.',
+                'Trained employees check who is asking and report suspicious requests.'
               ]
             }
           ]
@@ -207,18 +194,16 @@ const THREATS = [
           label: 'Strong Password Policy',
           correct: false,
           sections: [
-            { heading: 'What it does', text: 'Ensures passwords are long, complex, and unique, making them harder to guess.' },
-            { heading: 'When it is useful', text: 'Prevents brute-force attacks and credential stuffing.' },
-            { heading: 'Why it’s not the best choice', text: 'Strong passwords protect accounts, but they don’t stop an employee from being tricked into giving them away in a social engineering attack.' }
+            { heading: 'What it does', text: 'Requires long, complex, unique passwords.' },
+            { heading: 'Why it’s not the best choice', text: 'A strong password doesn’t help if an attacker tricks someone into sharing it.' }
           ]
         },
         {
           label: 'Firewall',
           correct: false,
           sections: [
-            { heading: 'What it does', text: 'Blocks unauthorized network access by filtering incoming and outgoing traffic.' },
-            { heading: 'When it is useful', text: 'Protects against malware, hackers, and unauthorized remote access.' },
-            { heading: 'Why it’s not the best choice', text: 'A firewall cannot stop an employee from willingly handing over sensitive information due to manipulation.' }
+            { heading: 'What it does', text: 'Blocks unwanted connections between a network and the internet.' },
+            { heading: 'Why it’s not the best choice', text: 'A firewall can’t stop an employee from handing information to someone they trust.' }
           ]
         }
       ]
@@ -248,41 +233,36 @@ const CLUES = {
   sender: {
     heading: 'The sender’s email address is suspicious.',
     list: [
-      'The domain “cybershield-security.com” is slightly different from the real company’s domain, “cybershield.com.”',
-      'Attackers often register similar-looking domains to impersonate real organizations.',
-      'A legitimate company IT team would send emails from their official domain, not a modified version.'
+      'The part after the @, “cybershield-security.com,” looks close to the real one, “cybershield.com,” but it isn’t the same.',
+      'Attackers register look-alike addresses to pretend to be real companies.'
     ]
   },
   greeting: {
-    heading: 'The email greeting is suspicious.',
+    heading: 'The greeting is generic.',
     list: [
-      'Phishing emails often use generic greetings like “Hello,” “Dear Customer,” or “Dear User” because they send the same email to many people.',
-      'A real IT support team would likely personalize the message if it were a genuine security issue.',
-      'Always be cautious of emails that do not address you directly, especially if they claim to be urgent or request sensitive information.'
+      'A plain “Hello,” with no name suggests the same email went to many people.',
+      'A real IT team would likely use your name for a security issue about your account.'
     ]
   },
   urgency: {
-    heading: 'The urgency in this message is a red flag.',
+    heading: 'The urgency is a red flag.',
     list: [
-      'Phishing emails often create a sense of urgency to pressure you into acting without thinking.',
-      'Legitimate IT support teams do not threaten immediate consequences for security updates.',
-      'If an email is demanding immediate action or threatening account suspension, always verify the request by contacting IT support directly through official channels.'
+      'Phishing emails pressure you to act before you think.',
+      'Real IT teams don’t threaten to lock your account. Check by contacting IT in a way you already trust, like calling the help desk.'
     ]
   },
   link: {
-    heading: 'The request to click a link to update your password is suspicious.',
+    heading: 'The link is suspicious.',
     list: [
-      'The phrase “secure link” is vague. If it were truly secure, it would display the actual URL so you could verify it.',
-      'Phishing emails often use fake links that look legitimate but redirect to fraudulent login pages designed to steal your credentials.',
-      'Always avoid clicking on links in unsolicited emails, especially when they ask you to enter sensitive information.'
+      'The link says “secure,” but you can’t see where it really goes.',
+      'Fake links often lead to look-alike login pages that steal your password.'
     ]
   },
   replyto: {
-    heading: 'The provided contact email is suspicious.',
+    heading: 'The contact email is suspicious.',
     list: [
-      'The reply-to address does not match the sender’s email. Attackers sometimes use a different, more legitimate-looking email address to lower suspicion.',
-      'Phishing emails often include fake support contact details to make the message appear more trustworthy.',
-      'If an email asks you to contact support, always verify the contact information on the company’s official website before reaching out.'
+      'It doesn’t match the sender’s address.',
+      'Attackers add fake support contacts to seem trustworthy. Find contact info on the company’s official website instead.'
     ]
   }
 };
@@ -294,8 +274,8 @@ const PASSWORD_METHODS = [
     id: 'dictionary',
     name: 'Dictionary Attack',
     summary: 'Uses common words and phrases.',
-    how: 'Attackers use precompiled lists of common words and phrases to guess passwords quickly. Passwords like “password123” or “qwerty” are cracked instantly.',
-    consequence: 'Employees using simple, guessable passwords put accounts and sensitive data at risk.',
+    how: 'Attackers try lists of common words and passwords. Passwords like “password123” or “qwerty” are guessed in seconds.',
+    consequence: 'Simple, common passwords put accounts and data at risk.',
     defense: [
       'Require strong, unique passwords that avoid common words.',
       'Use password management tools to generate and store secure passwords.'
@@ -305,19 +285,19 @@ const PASSWORD_METHODS = [
     id: 'brute',
     name: 'Brute Force Attack',
     summary: 'Tries every possible combination.',
-    how: 'Attackers try every possible password combination until they find the right one. Short passwords (8 characters or less) can be cracked in minutes.',
+    how: 'Attackers try every possible combination until one works. Passwords of 8 characters or fewer can be cracked in minutes.',
     consequence: 'The shorter the password, the easier it is to break.',
     defense: [
-      'Require long passwords (at least 12+ characters).',
-      'Enforce multi-factor authentication to prevent access even if a password is cracked.'
+      'Require long passwords (12 or more characters).',
+      'Turn on two-factor authentication (a second check, like a phone code) so a cracked password isn’t enough.'
     ]
   },
   {
     id: 'personal',
     name: 'Personal Information Attack',
     summary: 'Guesses based on names, birthdays, or company details.',
-    how: 'Attackers guess passwords using personal details like names, birthdays, or company-related terms. Employees using “Sarah1995” or “Cybershield2024” make it easy for attackers to guess.',
-    consequence: 'Publicly available information can be used against employees to break into accounts.',
+    how: 'Attackers guess passwords from personal details like names, birthdays or the company name. “Sarah1995” and “Cybershield2024” are easy guesses.',
+    consequence: 'Information posted online can be used to guess passwords.',
     defense: [
       'Avoid using personal details in passwords.',
       'Use randomly generated passwords that are not tied to the user.'
@@ -351,9 +331,9 @@ const DEVICES = [
     username: 'SurveillanceAdmin',
     password: 'W4%pXv!92Nq#Lm',
     secure: true,
-    risk: 'Unsecured security cameras can be hacked, allowing attackers to spy on businesses, employees, and sensitive areas. Default credentials make unauthorized access easy, putting privacy and security at risk.',
+    risk: 'Hacked security cameras let attackers spy on employees and private areas.',
     verdictTitle: 'Credentials Changed',
-    verdict: 'This follows best security practices—a unique username and a long, complex password.',
+    verdict: 'This follows best practice: a unique username and a long, complex password.',
     outcomeTitle: 'Security Camera (Secure)',
     outcome: [
       'No security breach detected.',
@@ -368,13 +348,13 @@ const DEVICES = [
     username: 'guest',
     password: '0000',
     secure: false,
-    risk: 'Unsecured smart thermostats can be hijacked, allowing attackers to control building temperatures, disrupt operations, and even gain access to connected systems. Default credentials make them easy targets.',
+    risk: 'Hacked thermostats let attackers change building temperatures and reach other connected systems.',
     verdictTitle: 'Default Credentials Still in Use',
     verdict: 'This is a common factory default that attackers can easily find online and use to access the thermostat.',
     outcomeTitle: 'Smart Thermostat (Compromised)',
     outcome: [
       'Default credentials allowed an attacker to remotely control the thermostat.',
-      'This could disrupt operations, overheat or freeze office spaces, and provide a foothold for further attacks on connected systems.'
+      'This could disrupt the office and give the attacker a way into other connected systems.'
     ]
   }
 ];
@@ -396,19 +376,19 @@ const TARGETS = {
 const STRATEGIES = {
   authority: {
     label: 'Authority',
-    text: 'Attackers exploit authority by pretending to be someone in power, like IT staff or maintenance workers, to pressure victims into compliance without question.'
+    text: 'Attackers pretend to be someone in charge, like IT staff or a maintenance worker, so victims follow orders without asking questions.'
   },
   fear: {
     label: 'Fear',
-    text: 'By creating a sense of urgency or danger, attackers make victims act impulsively—such as responding to a fake security alert or handing over credentials to avoid consequences.'
+    text: 'Attackers create a sense of danger, like a fake security alert, so victims act before they think.'
   },
   urgency: {
     label: 'Urgency',
-    text: 'By creating a sense of urgency or danger, attackers make victims act impulsively—such as responding to a fake security alert or handing over credentials to avoid consequences.'
+    text: 'Attackers set a tight deadline, like “restore access now,” so victims act before they think.'
   },
   curiosity: {
     label: 'Curiosity',
-    text: 'Attackers exploit curiosity by presenting something intriguing—like a mysterious email, a dropped USB drive, or an unexpected package—luring victims into engaging without thinking about the risks.'
+    text: 'Attackers offer something interesting, like a mystery USB drive or email, so victims engage without thinking about the risk.'
   }
 };
 
@@ -425,51 +405,51 @@ const PHYSICAL_LABELS = {
 const SCENARIOS = [
   {
     attack: 'phishing', target: 'ceo', strategy: 'urgency',
-    text: 'A phishing email was sent to the CEO, claiming their account had been compromised. The message pressured them to click a link immediately to “restore access.”',
-    strong: ['The CEO recognized the red flags.', 'They did not click the link and reported the email to IT.', 'Security policies prevented the attack from succeeding.'],
-    weak: ['The CEO panicked and clicked the link.', 'Attackers stole login credentials, gaining access to sensitive company systems.', 'A data breach occurred, requiring immediate response from IT.']
+    text: 'A phishing email told the CEO their account had been hacked. It pushed them to click a link right away to “restore access.”',
+    strong: ['The CEO spotted the red flags.', 'They didn’t click the link and reported the email to IT.', 'The attack failed.'],
+    weak: ['The CEO panicked and clicked the link.', 'Attackers stole their login and got into company systems.', 'IT had to respond to a data breach.']
   },
   {
     attack: 'phishing', target: 'employee', strategy: 'urgency',
-    text: 'A phishing email was sent to the employee, claiming their account had been compromised. The message pressured them to click a link immediately to “restore access.”',
-    strong: ['The employee recognized the red flags.', 'They did not click the link and reported the email to IT.', 'Security policies prevented the attack from succeeding.'],
-    weak: ['The employee panicked and clicked the link.', 'Attackers stole login credentials, gaining access to sensitive company systems.', 'A data breach occurred, requiring immediate response from IT.']
+    text: 'A phishing email told an employee their account had been hacked. It pushed them to click a link right away to “restore access.”',
+    strong: ['The employee spotted the red flags.', 'They didn’t click the link and reported the email to IT.', 'The attack failed.'],
+    weak: ['The employee panicked and clicked the link.', 'Attackers stole their login and got into company systems.', 'IT had to respond to a data breach.']
   },
   {
     attack: 'tailgating', target: 'ceo', strategy: 'authority', physical: true,
-    text: 'An attacker posed as a maintenance worker and approached the CEO outside the building. Speaking with authority, they claimed they needed urgent access to fix an issue inside. The goal was to bypass security protocols and gain unauthorized entry.',
-    strong: ['The CEO followed security protocols.', 'They refused to let the maintenance worker in without proper verification and directed them to check in at reception.', 'The attacker was denied access, preventing a potential security breach.'],
-    weak: ['The CEO assumed the maintenance worker was legitimate and held the door open without verifying their identity.', 'The attacker gained unauthorized access to the building.', 'They were able to move freely, potentially reaching secure offices or server rooms, putting sensitive company assets at risk.']
+    text: 'An attacker dressed as a maintenance worker approached the CEO outside the building. Acting like they were in charge, they asked to be let in to fix an urgent problem.',
+    strong: ['The CEO followed security rules.', 'They sent the worker to check in at reception.', 'The attacker never got inside.'],
+    weak: ['The CEO held the door without checking the worker’s ID.', 'The attacker got inside the building.', 'They could now reach offices and server rooms.']
   },
   {
     attack: 'tailgating', target: 'employee', strategy: 'authority', physical: true,
-    text: 'An attacker posed as a maintenance worker and approached the employee outside the building. Speaking with authority, they claimed they needed urgent access to fix an issue inside. The goal was to bypass security protocols and gain unauthorized entry.',
-    strong: ['The employee followed security protocols.', 'They refused to let the maintenance worker in without proper verification and directed them to check in at reception.', 'The attacker was denied access, preventing a potential security breach.'],
-    weak: ['The employee assumed the maintenance worker was legitimate and held the door open without verifying their identity.', 'The attacker gained unauthorized access to the building.', 'They were able to move freely, potentially reaching secure offices or server rooms, putting sensitive company assets at risk.']
+    text: 'An attacker dressed as a maintenance worker approached an employee outside the building. Acting like they were in charge, they asked to be let in to fix an urgent problem.',
+    strong: ['The employee followed security rules.', 'They sent the worker to check in at reception.', 'The attacker never got inside.'],
+    weak: ['The employee held the door without checking the worker’s ID.', 'The attacker got inside the building.', 'They could now reach offices and server rooms.']
   },
   {
     attack: 'pretexting', target: 'it', strategy: 'authority',
-    text: 'A caller posing as an IT administrator contacted the IT department, claiming there was a critical system issue. Using authority, they attempt to pressure the employee to reset a high-level account password.',
-    strong: ['The IT department employee recognized the red flags.', 'They refused to reset the password without proper verification and reported the call to security.', 'Security policies prevented the attacker from gaining unauthorized access.'],
-    weak: ['The IT department employee panicked and followed the caller’s instructions, believing the request was legitimate.', 'They reset the account password, unknowingly granting the attacker access.', 'The attacker infiltrated company systems, leading to a data breach that required an urgent security response.']
+    text: 'A caller pretending to be an IT administrator called the IT department about a “critical system issue.” Acting like they were in charge, they told an employee to reset a high-level account password.',
+    strong: ['The IT employee spotted the red flags.', 'They wouldn’t reset the password without checking who was calling, and they reported the call.', 'The attacker got nothing.'],
+    weak: ['The IT employee believed the caller and reset the password.', 'That gave the attacker access to the account.', 'The attacker broke into company systems and caused a data breach.']
   },
   {
     attack: 'pretexting', target: 'it', strategy: 'fear',
-    text: 'A caller posing as an IT administrator contacted the IT department, warning of a security breach that could shut down critical systems. Using fear, they attempted to pressure the employee to reset a high-level account password immediately to prevent data loss.',
-    strong: ['The IT department employee recognized the red flags.', 'They remained calm and refused to reset the password without proper verification.', 'The attempted attack was reported to security, preventing unauthorized access and protecting company systems.'],
-    weak: ['The IT department employee panicked, believing the threat was real.', 'They reset the account password without verifying the request, unknowingly granting the attacker access.', 'The attacker breached company systems, leading to a security incident that required an urgent response.']
+    text: 'A caller pretending to be an IT administrator warned that a breach would shut down critical systems. To scare the IT employee, they demanded a password reset right away.',
+    strong: ['The IT employee stayed calm and spotted the red flags.', 'They wouldn’t reset the password without checking who was calling.', 'They reported the call, and company systems stayed safe.'],
+    weak: ['The IT employee panicked and believed the threat.', 'They reset the password without checking, giving the attacker access.', 'The attacker broke into company systems.']
   },
   {
     attack: 'baiting', target: 'guard', strategy: 'fear',
-    text: 'An attacker left a USB drive labeled “Confidential Security Footage” near the security guard’s station. Using fear, they hoped the guard would plug it in immediately to check for a security threat, unknowingly infecting the system with malware.',
-    strong: ['The security guard recognized the red flags.', 'They did not plug in the USB drive and instead reported it to the IT security team for proper analysis.', 'Security policies prevented a potential malware infection, keeping company systems safe.'],
-    weak: ['The security guard panicked, believing the USB contained urgent security footage.', 'They plugged it into a company computer, unknowingly infecting the system with malware.', 'The attacker gained access to internal networks, leading to a security breach that required an urgent response.']
+    text: 'An attacker left a USB drive labeled “Confidential Security Footage” near the guard’s station. They hoped fear would make the guard plug it in to check for a threat. The drive would secretly install malware (harmful software).',
+    strong: ['The guard spotted the red flags.', 'They gave the USB drive to IT security without plugging it in.', 'No malware got onto company systems.'],
+    weak: ['The guard panicked and plugged the drive into a company computer.', 'Malware infected the system.', 'The attacker got into the company network.']
   },
   {
     attack: 'baiting', target: 'guard', strategy: 'curiosity',
-    text: 'An attacker left a USB drive labeled “Employee Bonuses 2024” near the security guard’s station. Using curiosity, they hoped the guard would plug it in out of interest, unknowingly installing malware on the company’s network.',
-    strong: ['The security guard recognized the red flags and suspected the USB drive could be a security risk.', 'They did not plug it in and instead reported it to the IT security team for proper analysis.', 'Security policies prevented a potential malware infection, keeping company systems safe.'],
-    weak: ['The security guard’s curiosity got the best of them, and they plugged in the USB drive to see what was inside.', 'Unknowingly, they installed malware on the company’s network, giving the attacker remote access.', 'The breach compromised sensitive data, requiring an urgent IT security response.']
+    text: 'An attacker left a USB drive labeled “Employee Bonuses 2024” near the guard’s station. They hoped curiosity would make the guard plug it in. The drive would secretly install malware (harmful software).',
+    strong: ['The guard suspected the drive was a trap.', 'They gave it to IT security without plugging it in.', 'No malware got onto company systems.'],
+    weak: ['The guard got curious and plugged in the drive.', 'Malware gave the attacker remote access to the network.', 'Sensitive data was exposed.']
   }
 ];
 
@@ -675,6 +655,7 @@ function markInvestigated(id) {
 function goTo(threatId, view) {
   state.threatId = threatId;
   state.view = view || 'learn';
+  state.navHint = false;
   state.fx = { enter: true };
   render();
   screenTitle.focus();
@@ -881,7 +862,7 @@ function renderDashboard() {
     el('span', { className: 'avatar' }, [icon('user')]),
     el('div', null, [
       el('p', { className: 'welcome-name', text: 'Cyber Analyst' }),
-      el('p', { className: 'welcome-text', text: 'Welcome back, Cyber Analyst. Click a threat below to investigate.' })
+      el('p', { className: 'welcome-text', text: `Pick a threat to investigate. Threats stopped: ${THREATS.filter(function (threat) { return state.progress[threat.id].defended; }).length} of ${THREATS.length}.` })
     ])
   ]);
 
@@ -936,6 +917,8 @@ function stepState(viewId, progress) {
   return 'open';
 }
 
+const LOCKED_HINT = 'Finish Investigate to unlock Defend.';
+
 function stepAriaLabel(view, number, stepStatus) {
   if (stepStatus === 'done') return `Step ${number}: ${view.label}, completed`;
   if (stepStatus === 'locked') return `Step ${number}: ${view.label}, unlocks after you finish investigating`;
@@ -951,7 +934,7 @@ function renderToolNav() {
     className: 'tool-btn tool-btn-home',
     'data-key': 'nav-dashboard',
     onClick: function () { goTo(null); }
-  }, [iconBox('dashboard'), el('span', { className: 'tool-label', text: 'Dashboard' })]));
+  }, [iconBox('dashboard'), el('span', { className: 'tool-label', text: 'All threats' })]));
 
   const steps = el('ol', { className: 'nav-steps' }, VIEWS.map(function (view, index) {
     const number = index + 1;
@@ -967,14 +950,25 @@ function renderToolNav() {
       'data-key': `nav-${view.id}`,
       'aria-current': isCurrent ? 'step' : null,
       'aria-label': stepAriaLabel(view, number, stepStatus),
-      disabled: stepStatus === 'locked',
-      onClick: function () { goTo(state.threatId, view.id); }
+      'aria-disabled': stepStatus === 'locked' ? 'true' : null,
+      onClick: function () {
+        if (stepStatus === 'locked') {
+          state.navHint = true;
+          render();
+          announce(LOCKED_HINT);
+          return;
+        }
+        goTo(state.threatId, view.id);
+      }
     }, [
       el('span', { className: 'nav-step-mark', 'aria-hidden': 'true' }, [marker]),
       el('span', { className: 'tool-label', 'aria-hidden': 'true', text: view.label })
     ])]);
   }));
   toolNav.appendChild(steps);
+  if (state.navHint) {
+    toolNav.appendChild(el('p', { className: 'nav-hint', 'aria-hidden': 'true' }, [icon('lock', 'chip-icon'), LOCKED_HINT]));
+  }
 }
 
 function renderThreat(threat, fx) {
@@ -1016,10 +1010,7 @@ function nextStepButton(label) {
 function renderLearn(threat, fx) {
   const severity = SEVERITY[threat.id];
   main.appendChild(el('div', { className: 'split learn' }, [
-    el('figure', { className: classes('learn-figure', fx.enter && 'scan-once') }, [
-      el('img', { src: threat.image, alt: threat.imageAlt })
-    ]),
-    el('section', { className: 'panel learn-text pageable', 'aria-labelledby': 'learn-heading' }, [
+    el('section',{ className: 'panel learn-text pageable', 'aria-labelledby': 'learn-heading' }, [
       el('p', { className: `threat-level severity-${severity.id}` }, [icon('alert', 'threat-level-icon'), `Threat level: ${severity.label}`]),
       el('h2', { id: 'learn-heading', className: 'learn-heading', text: 'About this threat' })
     ].concat(threat.learn.map(function (para) {
@@ -1030,7 +1021,10 @@ function renderLearn(threat, fx) {
         key: 'start-investigation',
         children: [icon('search'), 'Investigate the threat']
       })
-    ]))
+    ])),
+    el('figure', { className: classes('learn-figure', fx.enter && 'scan-once') }, [
+      el('img', { src: threat.image, alt: threat.imageAlt })
+    ])
   ]));
 }
 
@@ -1100,7 +1094,7 @@ function renderPhishing(fx) {
   } else {
     feedbackChildren = [
       el('h2', { className: 'feedback-title' }, [icon('search', 'title-icon'), 'Threat analysis']),
-      el('p', { text: 'Click a part of the email to check it.' })
+      el('p', { text: `Find the ${CLUE_COUNT} red flags. Click any part of the email that looks wrong.` })
     ];
   }
 
