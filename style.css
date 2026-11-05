@@ -1022,6 +1022,42 @@ button:disabled {
   font-size: 1.15rem;
 }
 
+.learn-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
+  gap: 12px;
+  margin-block: 14px;
+}
+
+.learn-row-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--card);
+  color: var(--card-text);
+  border: 2px solid var(--brand-mid);
+  border-radius: 6px;
+}
+
+.learn-row-icon .icon {
+  width: 20px;
+  height: 20px;
+}
+
+.learn-row-label {
+  margin: 0 0 2px;
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.learn-row p {
+  margin: 0;
+}
+
 .threat-level {
   display: inline-flex;
   align-items: center;

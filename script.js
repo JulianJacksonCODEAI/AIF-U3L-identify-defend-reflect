@@ -837,7 +837,9 @@ function renderNetworkMap(justDefended) {
     group.appendChild(svgEl('circle', { class: 'node-pulse', cx: pos.x, cy: pos.y, r: 26 }));
     group.appendChild(svgEl('circle', { class: 'node-core', cx: pos.x, cy: pos.y, r: 24 }));
     group.appendChild(icon(threat.icon, 'map-icon', { x: pos.x - 12, y: pos.y - 12, w: 24 }));
-    group.appendChild(svgEl('text', { class: 'map-label', x: pos.x, y: pos.y + 42, 'text-anchor': 'middle' }, threat.name));
+    // Labels sit on the side away from the server line and outside the pulse ring (radius 26 × 1.5).
+    const labelY = pos.y < SERVER_POS.y ? pos.y - 46 : pos.y + 54;
+    group.appendChild(svgEl('text', { class: 'map-label', x: pos.x, y: labelY, 'text-anchor': 'middle' }, threat.name));
     if (status === 'defended') {
       const badge = svgEl('g', { class: 'shield-badge' });
       badge.appendChild(svgEl('circle', { cx: pos.x + 20, cy: pos.y - 20, r: 13 }));
@@ -1007,14 +1009,28 @@ function nextStepButton(label) {
   });
 }
 
+const LEARN_ROWS = [
+  { label: 'What it is', icon: 'threat' },
+  { label: 'How it works', icon: 'unlock' },
+  { label: 'Why it’s risky', icon: 'alert' }
+];
+
 function renderLearn(threat, fx) {
   const severity = SEVERITY[threat.id];
   main.appendChild(el('div', { className: 'split learn' }, [
     el('section',{ className: 'panel learn-text pageable', 'aria-labelledby': 'learn-heading' }, [
       el('p', { className: `threat-level severity-${severity.id}` }, [icon('alert', 'threat-level-icon'), `Threat level: ${severity.label}`]),
       el('h2', { id: 'learn-heading', className: 'learn-heading', text: 'About this threat' })
-    ].concat(threat.learn.map(function (para) {
-      return el('p', { text: para });
+    ].concat(threat.learn.map(function (para, i) {
+      // Each Learn line has the same job across threats: what it is, how it works, why it's risky.
+      const row = LEARN_ROWS[i] || LEARN_ROWS[LEARN_ROWS.length - 1];
+      return el('div', { className: 'learn-row' }, [
+        el('span', { className: 'learn-row-icon' }, [icon(row.icon === 'threat' ? threat.icon : row.icon)]),
+        el('div', null, [
+          el('h3', { className: 'learn-row-label', text: row.label }),
+          el('p', { text: para })
+        ])
+      ]);
     })).concat([
       button('Investigate the threat', function () { goTo(threat.id, 'investigate'); }, {
         className: 'btn btn-primary',
