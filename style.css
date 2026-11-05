@@ -158,11 +158,58 @@ button:disabled {
   gap: var(--gap);
 }
 
+/* Two rows on every screen, so the header and content don't move between the dashboard and threat screens. */
 .tool-nav {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.analyst {
+  display: flex;
   align-items: center;
-  gap: 8px var(--gap);
+  gap: 8px;
+  min-height: 44px;
+  margin: 0;
+  padding: 6px 4px;
+  font-weight: 600;
+}
+
+.analyst .icon-box {
+  width: 36px;
+  height: 36px;
+  background: var(--brand-mid);
+  color: var(--text);
+  border-color: var(--brand-mid);
+}
+
+.nav-row {
+  position: relative;
+}
+
+/* Floats under the steps so showing it never changes the header height. */
+.nav-row .nav-hint {
+  position: absolute;
+  inset-block-start: calc(100% + 6px);
+  inset-inline-start: var(--gap);
+  z-index: 2;
+  padding: 6px 12px;
+  background: var(--terminal);
+  border: 1px solid var(--panel-raised);
+  border-radius: var(--radius);
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.nav-status {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  margin: 0;
+  padding-inline: var(--gap) 0;
+  border-inline-start: 2px solid var(--panel-raised);
+  color: var(--muted);
 }
 
 .tool-nav[hidden] {
@@ -2015,7 +2062,7 @@ button:disabled {
 }
 
 .dashboard {
-  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
 }
 
 .learn {
