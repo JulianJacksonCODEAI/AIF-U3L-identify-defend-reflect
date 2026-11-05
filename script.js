@@ -837,7 +837,9 @@ function renderNetworkMap(justDefended) {
     group.appendChild(svgEl('circle', { class: 'node-pulse', cx: pos.x, cy: pos.y, r: 26 }));
     group.appendChild(svgEl('circle', { class: 'node-core', cx: pos.x, cy: pos.y, r: 24 }));
     group.appendChild(icon(threat.icon, 'map-icon', { x: pos.x - 12, y: pos.y - 12, w: 24 }));
-    group.appendChild(svgEl('text', { class: 'map-label', x: pos.x, y: pos.y + 42, 'text-anchor': 'middle' }, threat.name));
+    // Labels sit on the side away from the server line and outside the pulse ring (radius 26 × 1.5).
+    const labelY = pos.y < SERVER_POS.y ? pos.y - 46 : pos.y + 54;
+    group.appendChild(svgEl('text', { class: 'map-label', x: pos.x, y: labelY, 'text-anchor': 'middle' }, threat.name));
     if (status === 'defended') {
       const badge = svgEl('g', { class: 'shield-badge' });
       badge.appendChild(svgEl('circle', { cx: pos.x + 20, cy: pos.y - 20, r: 13 }));
