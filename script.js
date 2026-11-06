@@ -1037,7 +1037,7 @@ function renderLearn(threat, fx) {
       })
     ])),
     el('figure', { className: classes('learn-figure', fx.enter && 'scan-once') }, [
-      el('img', { src: threat.image, alt: threat.imageAlt })
+      el('img', { src: threat.image, alt: threat.imageAlt, width: 1024, height: 765, decoding: 'async' })
     ])
   ]));
 }
@@ -1199,6 +1199,7 @@ function renderPasswords(fx) {
 
   main.appendChild(el('div', { className: 'split split-narrow-first' }, [
     el('div', { className: 'side' }, [
+      el('h2', { className: 'panel-heading', text: 'Password-cracking methods' }),
       intro,
       methods,
       allTested ? el('p', { className: 'done-note', text: 'You tested all three methods.' }) : null,
