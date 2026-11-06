@@ -1,13 +1,15 @@
 @font-face {
   font-family: "Space Grotesk";
-  src: url("SpaceGrotesk-VariableFont_wght.ttf") format("truetype");
+  src: url("SpaceGrotesk-VariableFont_wght.woff2") format("woff2"),
+    url("SpaceGrotesk-VariableFont_wght.ttf") format("truetype");
   font-weight: 300 700;
   font-display: swap;
 }
 
 @font-face {
   font-family: "Geist";
-  src: url("Geist-VariableFont_wght.ttf") format("truetype");
+  src: url("Geist-VariableFont_wght.woff2") format("woff2"),
+    url("Geist-VariableFont_wght.ttf") format("truetype");
   font-weight: 100 900;
   font-display: swap;
 }
