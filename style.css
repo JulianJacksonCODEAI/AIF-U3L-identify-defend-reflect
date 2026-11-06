@@ -515,7 +515,7 @@ button:disabled {
 
 .btn-primary:hover {
   background: var(--brand-dark);
-  box-shadow: 0 0 16px rgba(172, 168, 234, 0.6);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
 }
 
 .chip {
@@ -563,12 +563,10 @@ button:disabled {
 
 .banner-good {
   background: var(--good-dark);
-  box-shadow: 0 0 18px rgba(124, 219, 135, 0.45);
 }
 
 .banner-bad {
   background: var(--bad-dark);
-  box-shadow: 0 0 18px rgba(240, 127, 176, 0.45);
 }
 
 .banner-icon {
@@ -604,15 +602,14 @@ button:disabled {
 
 .feedback {
   overflow: auto;
-  border-inline-start: 6px solid var(--panel-raised);
 }
 
 .feedback-good {
-  border-inline-start-color: var(--good);
+  border-color: var(--good);
 }
 
 .feedback-bad {
-  border-inline-start-color: var(--bad);
+  border-color: var(--bad);
 }
 
 .feedback-title {
@@ -693,7 +690,6 @@ button:disabled {
 .pager-next:not(:disabled) {
   background: var(--brand);
   border-color: var(--brand);
-  box-shadow: 0 0 14px rgba(172, 168, 234, 0.5);
 }
 
 .pager-btn:disabled {
@@ -946,17 +942,17 @@ button:disabled {
   padding: 8px 12px;
   background: var(--panel);
   border: 2px solid var(--panel-raised);
-  border-inline-start: 6px solid var(--accent);
+  border-color: var(--accent);
   border-radius: var(--radius);
   text-align: start;
 }
 
 .alert-investigated .threat-card {
-  border-inline-start-color: var(--warn);
+  border-color: var(--warn);
 }
 
 .alert-defended .threat-card {
-  border-inline-start-color: var(--good);
+  border-color: var(--good);
 }
 
 .threat-card:hover {
@@ -970,7 +966,6 @@ button:disabled {
 }
 
 .threat-card:hover .icon-box {
-  box-shadow: 0 0 14px rgba(172, 168, 234, 0.7);
 }
 
 .threat-card-text {
@@ -1349,7 +1344,7 @@ button:disabled {
 .defense-btn:hover,
 .step-btn:hover {
   border-color: var(--brand);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35), 0 0 12px rgba(172, 168, 234, 0.4);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
 }
 
 .choice-card[aria-pressed="true"],
@@ -1358,7 +1353,7 @@ button:disabled {
 .step-btn[aria-pressed="true"] {
   background: var(--card-selected);
   border-color: var(--brand);
-  box-shadow: 0 0 0 3px var(--brand-mid), 0 0 20px rgba(172, 168, 234, 0.55);
+  box-shadow: 0 0 0 3px var(--brand-mid);
 }
 
 .choice-card {
@@ -1393,7 +1388,7 @@ button:disabled {
 .defense-btn.is-deployed {
   background: var(--good-light);
   border-color: var(--good-dark);
-  box-shadow: 0 0 0 3px var(--good), 0 0 20px rgba(124, 219, 135, 0.55);
+  box-shadow: 0 0 0 3px var(--good);
 }
 
 /* Weak passwords */
@@ -1426,7 +1421,6 @@ button:disabled {
 .terminal-field.is-cracked {
   color: var(--bad);
   border-color: var(--bad);
-  box-shadow: 0 0 14px rgba(240, 127, 176, 0.45);
 }
 
 .terminal-status {
@@ -1508,14 +1502,14 @@ button:disabled {
   background: var(--bad-dark);
   color: var(--bad);
   border-color: var(--bad);
-  box-shadow: 0 0 24px rgba(240, 127, 176, 0.55);
+  box-shadow: 0 0 0 2px var(--bad);
 }
 
 .device-safe {
   background: var(--good-dark);
   color: var(--good);
   border-color: var(--good);
-  box-shadow: 0 0 24px rgba(124, 219, 135, 0.55);
+  box-shadow: 0 0 0 2px var(--good);
 }
 
 .device-badge {
@@ -1652,7 +1646,6 @@ button:disabled {
 }
 
 .verdict-secure:hover {
-  box-shadow: 0 0 16px rgba(124, 219, 135, 0.6);
 }
 
 .verdict-not-secure {
@@ -1660,7 +1653,6 @@ button:disabled {
 }
 
 .verdict-not-secure:hover {
-  box-shadow: 0 0 16px rgba(240, 127, 176, 0.6);
 }
 
 .verdict-btn[aria-pressed="true"] {
@@ -1790,7 +1782,6 @@ button:disabled {
 .path-weak .path-target .icon {
   background: var(--bad-dark);
   border-color: var(--bad);
-  box-shadow: 0 0 16px rgba(240, 127, 176, 0.7);
 }
 
 .path-strong .path-target .icon {
