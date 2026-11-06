@@ -2330,4 +2330,43 @@ button:disabled {
   .scan-once::after {
     display: none;
   }
+
+  /* No movement, but state changes still register: a short fade in place of pops, stamps and glitches,
+     and a color flash in place of the wrong-answer shake. Looping effects stay off. */
+  .pop-in,
+  .stamp-in,
+  .glitch,
+  .pulse-safe,
+  .banner.deploy .banner-icon,
+  .just-defended .shield-badge {
+    animation: rm-fade 0.3s ease-out both !important;
+  }
+
+  .stamp-in.delayed {
+    animation-delay: 0.6s !important;
+  }
+
+  .shake {
+    animation: rm-flash 0.5s ease-out !important;
+  }
+}
+
+@keyframes rm-fade {
+  from {
+    opacity: 0.35;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rm-flash {
+  from {
+    box-shadow: 0 0 0 3px var(--accent);
+  }
+
+  to {
+    box-shadow: 0 0 0 3px transparent;
+  }
 }
