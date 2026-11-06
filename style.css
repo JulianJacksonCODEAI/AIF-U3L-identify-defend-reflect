@@ -2157,8 +2157,36 @@ button:disabled {
   .split,
   .split-narrow-first,
   .credentials,
+  .social,
   .steps {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Keep the header short on phones: integrity on one line, steps on one row. */
+  .integrity {
+    flex-wrap: nowrap;
+    width: 100%;
+  }
+
+  .integrity-bar {
+    flex: 1 1 40px;
+    min-width: 40px;
+  }
+
+  .nav-steps {
+    gap: 4px;
+    padding-inline: 0;
+    border-inline-start: 0;
+  }
+
+  .nav-step {
+    padding-inline-end: 10px;
+  }
+
+  .nav-status {
+    padding-inline: 0;
+    border-inline-start: 0;
+    min-height: 0;
   }
 
   .topbar {
@@ -2189,6 +2217,22 @@ button:disabled {
 
   .tool-label {
     font-size: 0.85rem;
+  }
+}
+
+/* Smallest phones: the bar, percent and status still say it; screen readers keep the label. */
+@media (max-width: 360px) {
+  .integrity-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .integrity > span {
+    white-space: nowrap;
   }
 }
 
