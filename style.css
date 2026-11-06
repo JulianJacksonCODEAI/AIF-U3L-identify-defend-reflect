@@ -715,8 +715,10 @@ button:disabled {
   bottom: 0;
   left: 0;
   pointer-events: none;
-  background: linear-gradient(to bottom, transparent 40%, rgba(172, 168, 234, 0.35) 50%, transparent 60%);
-  transform: translateY(-100%);
+  /* The band moves by background-position, so the overlay never leaves its box and never adds scroll space. */
+  background: linear-gradient(to bottom, transparent 40%, rgba(172, 168, 234, 0.35) 50%, transparent 60%) no-repeat;
+  background-size: 100% 300%;
+  background-position: 0 100%;
   animation: scan 1.1s ease-out forwards;
 }
 
@@ -1936,7 +1938,8 @@ button:disabled {
 
 @keyframes scan {
   to {
-    transform: translateY(100%);
+    background-position: 0 0;
+    opacity: 0;
   }
 }
 
@@ -2056,10 +2059,15 @@ button:disabled {
 }
 
 .split,
-.credentials,
 .social,
 .dashboard-body {
   grid-template-rows: minmax(0, 1fr);
+}
+
+/* Default Credentials: columns take their natural height. If the window is too short, the page area
+   scrolls once instead of each column getting its own scroll bar. */
+.main > .credentials {
+  max-height: none;
 }
 
 .dashboard {
@@ -2081,22 +2089,16 @@ button:disabled {
 .step,
 .side,
 .map-panel,
-.alerts,
-.device-list,
-.device-center {
+.alerts {
   max-height: 100%;
 }
 
 .side > *,
-.alerts,
-.device-list,
-.device-center {
+.alerts {
   min-height: 0;
 }
 
-.alerts,
-.device-list,
-.device-center {
+.alerts {
   overflow: auto;
 }
 
