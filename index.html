@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Identify, Defend, Reflect</title>
+  <link rel="preload" href="Geist-VariableFont_wght.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
@@ -34,7 +35,7 @@
 
   <div class="app">
     <header class="topbar">
-      <nav class="tool-nav" id="tool-nav" aria-label="Threat tools" hidden></nav>
+      <!-- Title comes first so Tab moves from it (focused on each screen change) to the steps. CSS keeps the steps on the left. -->
       <div class="header-end">
         <h1 class="screen-title" id="screen-title" tabindex="-1">Security Dashboard</h1>
         <div class="integrity integrity-danger" id="integrity">
@@ -44,6 +45,7 @@
           <span class="integrity-status" id="integrity-status">Under attack</span>
         </div>
       </div>
+      <nav class="tool-nav" id="tool-nav" aria-label="Threat tools" hidden></nav>
     </header>
     <main class="main" id="main"></main>
   </div>

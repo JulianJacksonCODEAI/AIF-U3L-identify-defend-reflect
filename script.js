@@ -853,20 +853,18 @@ function renderNetworkMap(justDefended) {
 }
 
 function renderDashboard() {
-  toolNav.hidden = true;
   screenTitle.textContent = 'Security Dashboard';
   document.title = 'Security Dashboard – Identify, Defend, Reflect';
 
   const justDefended = state.newlyDefended;
   state.newlyDefended = [];
 
-  const welcome = el('div', { className: 'welcome' }, [
-    el('span', { className: 'avatar' }, [icon('user')]),
-    el('div', null, [
-      el('p', { className: 'welcome-name', text: 'Cyber Analyst' }),
-      el('p', { className: 'welcome-text', text: `Pick a threat to investigate. Threats stopped: ${THREATS.filter(function (threat) { return state.progress[threat.id].defended; }).length} of ${THREATS.length}.` })
-    ])
-  ]);
+  // The analyst status fills the same two header rows that hold "All threats" and the steps on threat screens.
+  const stopped = THREATS.filter(function (threat) { return state.progress[threat.id].defended; }).length;
+  toolNav.hidden = false;
+  toolNav.setAttribute('role', 'none');
+  toolNav.appendChild(el('p', { className: 'analyst' }, [iconBox('user'), 'Cyber Analyst']));
+  toolNav.appendChild(el('p', { className: 'nav-status', text: `Pick a threat to investigate. Threats stopped: ${stopped} of ${THREATS.length}.` }));
 
   const map = el('section', { className: 'panel map-panel', 'aria-labelledby': 'map-heading' }, [
     el('h2', { id: 'map-heading', className: 'panel-heading', text: 'Network map' }),
@@ -901,7 +899,6 @@ function renderDashboard() {
   ]);
 
   main.appendChild(el('div', { className: 'dashboard' }, [
-    welcome,
     el('div', { className: 'dashboard-body' }, [alerts, map])
   ]));
 }
@@ -929,6 +926,7 @@ function stepAriaLabel(view, number, stepStatus) {
 
 function renderToolNav() {
   toolNav.hidden = false;
+  toolNav.removeAttribute('role');
   const progress = state.progress[state.threatId];
 
   toolNav.appendChild(el('button', {
@@ -967,10 +965,10 @@ function renderToolNav() {
       el('span', { className: 'tool-label', 'aria-hidden': 'true', text: view.label })
     ])]);
   }));
-  toolNav.appendChild(steps);
-  if (state.navHint) {
-    toolNav.appendChild(el('p', { className: 'nav-hint', 'aria-hidden': 'true' }, [icon('lock', 'chip-icon'), LOCKED_HINT]));
-  }
+  toolNav.appendChild(el('div', { className: 'nav-row' }, [
+    steps,
+    state.navHint ? el('p', { className: 'nav-hint', 'aria-hidden': 'true' }, [icon('lock', 'chip-icon'), LOCKED_HINT]) : null
+  ]));
 }
 
 function renderThreat(threat, fx) {
@@ -1039,7 +1037,7 @@ function renderLearn(threat, fx) {
       })
     ])),
     el('figure', { className: classes('learn-figure', fx.enter && 'scan-once') }, [
-      el('img', { src: threat.image, alt: threat.imageAlt })
+      el('img', { src: threat.image, alt: threat.imageAlt, width: 1024, height: 765, decoding: 'async' })
     ])
   ]));
 }
@@ -1201,6 +1199,7 @@ function renderPasswords(fx) {
 
   main.appendChild(el('div', { className: 'split split-narrow-first' }, [
     el('div', { className: 'side' }, [
+      el('h2', { className: 'panel-heading', text: 'Password-cracking methods' }),
       intro,
       methods,
       allTested ? el('p', { className: 'done-note', text: 'You tested all three methods.' }) : null,
