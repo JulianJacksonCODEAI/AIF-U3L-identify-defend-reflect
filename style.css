@@ -2104,9 +2104,13 @@ button:disabled {
   padding: 8px 14px;
 }
 
+/* The device circle gives up height first, so the panel fits without a scroll bar. */
 .device-art {
-  width: clamp(56px, 11vh, 120px);
+  flex: 0 1 clamp(56px, 11vh, 120px);
+  width: auto;
   height: clamp(56px, 11vh, 120px);
+  min-height: 48px;
+  aspect-ratio: 1;
 }
 
 /* Smaller screens */
