@@ -35,6 +35,12 @@
   --high: #F46800;
   --focus: #6FCAFF;
   --terminal: #000000;
+  --warn-dark: #611D00;
+  --warn-light: #FFE3CE;
+  --good-light: #CCF1D0;
+  --link: #06338D;
+  --paper: #FFFFFF;
+  --ink: #000000;
   --radius: 10px;
   --gap: clamp(8px, 1.6vw, 16px);
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -795,11 +801,11 @@ button:disabled {
 }
 
 .link-notStarted {
-  stroke: #7D0C3D;
+  stroke: var(--bad-dark);
 }
 
 .link-investigated {
-  stroke: #611D00;
+  stroke: var(--warn-dark);
 }
 
 .link-defended {
@@ -860,17 +866,17 @@ button:disabled {
 }
 
 .map-node-notStarted .node-core {
-  fill: #7D0C3D;
+  fill: var(--bad-dark);
   stroke: var(--accent);
 }
 
 .map-node-investigated .node-core {
-  fill: #611D00;
+  fill: var(--warn-dark);
   stroke: var(--warn);
 }
 
 .map-node-defended .node-core {
-  fill: #003F25;
+  fill: var(--good-dark);
   stroke: var(--good);
 }
 
@@ -996,7 +1002,7 @@ button:disabled {
 
 .severity-high {
   background: var(--high);
-  color: #000000;
+  color: var(--ink);
 }
 
 .alert-defended .severity {
@@ -1129,8 +1135,8 @@ button:disabled {
   display: flex;
   flex-direction: column;
   min-height: 0;
-  background: #FFFFFF;
-  color: #000000;
+  background: var(--paper);
+  color: var(--ink);
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: 0 0 0 2px var(--panel-raised), 0 10px 30px rgba(0, 0, 0, 0.4);
@@ -1152,11 +1158,11 @@ button:disabled {
 }
 
 .dot-red {
-  background: #E11970;
+  background: var(--accent-dark);
 }
 
 .dot-yellow {
-  background: #FFA868;
+  background: var(--warn);
 }
 
 .email-bar-title {
@@ -1187,8 +1193,8 @@ button:disabled {
 }
 
 .email-part:hover {
-  background: #FFE3CE;
-  border: 2px dashed #611D00;
+  background: var(--warn-light);
+  border: 2px dashed var(--warn-dark);
 }
 
 .email-part:active {
@@ -1200,7 +1206,7 @@ button:disabled {
 }
 
 .email-part.is-link {
-  color: #06338D;
+  color: var(--link);
   text-decoration: underline;
 }
 
@@ -1211,7 +1217,7 @@ button:disabled {
 .email-part.is-found {
   position: relative;
   border: 2px dashed var(--accent-dark);
-  background: #FBDAE8;
+  background: var(--card-selected);
 }
 
 .email-part.shake {
@@ -1378,12 +1384,12 @@ button:disabled {
 }
 
 .defense-btn.is-failed {
-  background: #FBDAE8;
-  color: #7D0C3D;
+  background: var(--card-selected);
+  color: var(--bad-dark);
 }
 
 .defense-btn.is-deployed {
-  background: #CCF1D0;
+  background: var(--good-light);
   border-color: var(--good-dark);
   box-shadow: 0 0 0 3px var(--good), 0 0 20px rgba(124, 219, 135, 0.55);
 }
@@ -1497,14 +1503,14 @@ button:disabled {
 }
 
 .device-hijacked {
-  background: #7D0C3D;
+  background: var(--bad-dark);
   color: var(--bad);
   border-color: var(--bad);
   box-shadow: 0 0 24px rgba(240, 127, 176, 0.55);
 }
 
 .device-safe {
-  background: #003F25;
+  background: var(--good-dark);
   color: var(--good);
   border-color: var(--good);
   box-shadow: 0 0 24px rgba(124, 219, 135, 0.55);
@@ -1597,7 +1603,7 @@ button:disabled {
 
 .login-fields dd {
   padding: 6px 10px;
-  background: #ffffff;
+  background: var(--paper);
   border-radius: 4px;
   overflow-wrap: anywhere;
 }
