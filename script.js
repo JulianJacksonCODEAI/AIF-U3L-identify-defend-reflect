@@ -23,11 +23,12 @@ const THREATS = [
     learn: [
       'Phishing is a cyberattack where criminals pretend to be a trusted group. They trick people into giving up passwords, money or private information.',
       'Phishing messages usually push you to act fast. They use urgent warnings and links to fake login pages.',
-      'One click can lead to stolen identities, lost money and data breaches, when private data gets out, that hurt both people and companies.'
+      'One click can lead to stolen identities, lost money and data breaches (when private data gets out). These hurt both people and companies.'
     ],
     defense: {
       title: 'Defend against phishing attacks',
-      question: 'Which security measure is the best defense against phishing?',
+      question: 'Several defenses help. Which one best stops phishing?',
+      recap: 'Phishing tricks people, so trained people are the best defense.',
       options: [
         {
           label: 'Two-Factor Authentication',
@@ -65,7 +66,7 @@ const THREATS = [
   {
     id: 'passwords',
     name: 'Weak Passwords',
-    investigateTitle: 'Password Problems',
+    investigateTitle: 'Weak Passwords',
     icon: 'password',
     image: 'learn-passwords.jpg',
     imageAlt: 'A hooded attacker on a ladder reaches for an open padlock on a laptop login screen next to a broken shield.',
@@ -76,7 +77,8 @@ const THREATS = [
     ],
     defense: {
       title: 'Defend against password attacks',
-      question: 'Which security measure is the best defense against weak passwords?',
+      question: 'Several defenses help. Which one best stops password attacks?',
+      recap: 'Long, unique passwords are hard to guess or crack with software.',
       options: [
         {
           label: 'Regular Software Updates',
@@ -125,7 +127,8 @@ const THREATS = [
     ],
     defense: {
       title: 'Defend against default credentials',
-      question: 'Which security measure is the best defense against default credentials?',
+      question: 'Several defenses help. Which one best stops default credential attacks?',
+      recap: 'Default passwords are public, so every device needs its own.',
       options: [
         {
           label: 'Encrypted Data',
@@ -174,7 +177,8 @@ const THREATS = [
     ],
     defense: {
       title: 'Defend against social engineering',
-      question: 'Which security measure is the best defense against social engineering?',
+      question: 'Several defenses help. Which one best stops social engineering?',
+      recap: 'Training helps people check who is asking before they share.',
       options: [
         {
           label: 'Security Awareness Training',
@@ -218,9 +222,9 @@ const EMAIL_PARAGRAPHS = [
   [{ text: 'Hello,', clue: 'greeting' }],
   [
     { text: 'We recently detected suspicious login attempts on your account.' },
-    { text: 'To ensure your security, you are required to update your password immediately.', clue: 'urgency', strong: true }
+    { text: 'To ensure your security, you are required to update your password immediately.', clue: 'urgency' }
   ],
-  [{ text: 'Failure to update your password within the next 24 hours will result in temporary suspension of your account access.', clue: 'urgency', strong: true }],
+  [{ text: 'Failure to update your password within the next 24 hours will result in temporary suspension of your account access.', clue: 'urgency' }],
   [
     { text: 'To update your password, please click on the secure link below:', clue: 'link' },
     { text: 'Update Password Now', clue: 'link', link: true, block: true }
@@ -277,8 +281,7 @@ const PASSWORD_METHODS = [
     how: 'Attackers try lists of common words and passwords. Passwords like “password123” or “qwerty” are guessed in seconds.',
     consequence: 'Simple, common passwords put accounts and data at risk.',
     defense: [
-      'Require strong, unique passwords that avoid common words.',
-      'Use password management tools to generate and store secure passwords.'
+      'Require strong, unique passwords that avoid common words.'
     ]
   },
   {
@@ -314,7 +317,7 @@ const DEVICES = [
     username: 'admin',
     password: 'admin',
     secure: false,
-    risk: null,
+    risk: 'Hacked routers let attackers see and redirect a company’s internet traffic.',
     verdictTitle: 'Default Credentials Still in Use',
     verdict: 'This is a common factory default that attackers can easily find online and use to access the router.',
     outcomeTitle: 'Router (Hijacked)',
@@ -399,7 +402,7 @@ const TRAINING_LABELS = {
 
 const PHYSICAL_LABELS = {
   strong: 'Strong Physical Security Policies',
-  weak: 'Weak Physical Security Awareness'
+  weak: 'Weak Physical Security Policies'
 };
 
 const SCENARIOS = [
@@ -648,6 +651,10 @@ function defendedRatio() {
   return defended / THREATS.length;
 }
 
+function deployedDefense(threat) {
+  return threat.defense.options.filter(function (option) { return option.correct; })[0];
+}
+
 function markInvestigated(id) {
   state.progress[id].investigated = true;
 }
@@ -861,10 +868,16 @@ function renderDashboard() {
 
   // The analyst status fills the same two header rows that hold "All threats" and the steps on threat screens.
   const stopped = THREATS.filter(function (threat) { return state.progress[threat.id].defended; }).length;
+  const allStopped = stopped === THREATS.length;
+  const doneMessage = `All ${THREATS.length} threats stopped. Network secure.`;
   toolNav.hidden = false;
   toolNav.setAttribute('role', 'none');
   toolNav.appendChild(el('p', { className: 'analyst' }, [iconBox('user'), 'Cyber Analyst']));
-  toolNav.appendChild(el('p', { className: 'nav-status', text: `Pick a threat to investigate. Threats stopped: ${stopped} of ${THREATS.length}.` }));
+  toolNav.appendChild(el('p', {
+    className: classes('nav-status', allStopped && 'nav-status-done'),
+    text: allStopped ? doneMessage : `Pick a threat to investigate. Threats stopped: ${stopped} of ${THREATS.length}.`
+  }));
+  if (allStopped && justDefended.length) announce(doneMessage);
 
   const map = el('section', { className: 'panel map-panel', 'aria-labelledby': 'map-heading' }, [
     el('h2', { id: 'map-heading', className: 'panel-heading', text: 'Network map' }),
@@ -872,26 +885,37 @@ function renderDashboard() {
   ]);
 
   const alerts = el('section', { className: 'alerts', 'aria-labelledby': 'alerts-heading' }, [
-    el('h2', { id: 'alerts-heading', className: 'panel-heading', text: 'Security alerts' }),
-    el('ul', { className: 'alert-list' }, THREATS.map(function (threat) {
+    el('h2', { id: 'alerts-heading', className: 'panel-heading', text: allStopped ? 'Threats stopped' : 'Security alerts' }),
+    el('ul', { className: classes('alert-list', allStopped && 'is-recap') }, THREATS.map(function (threat) {
       const status = threatStatus(threat.id);
       const severity = SEVERITY[threat.id];
+      const name = el('span', { className: 'threat-card-name', text: threat.name });
+      // Once every threat is stopped, each card recaps the defense that worked and why.
+      const details = allStopped
+        ? [
+          el('span', { className: 'threat-card-head' }, [
+            name,
+            el('span', { className: 'threat-card-defense' }, [icon('shield', 'chip-icon'), deployedDefense(threat).label])
+          ]),
+          el('span', { className: 'threat-card-reason', text: threat.defense.recap })
+        ]
+        : [
+          name,
+          el('span', { className: 'alert-meta' }, [
+            el('span', { className: `severity severity-${severity.id}`, text: severity.label }),
+            el('span', { className: `status status-${status}` }, [
+              el('span', { className: 'status-light', 'aria-hidden': 'true' }),
+              STATUS_LABELS[status]
+            ])
+          ])
+        ];
       return el('li', { className: classes('alert-item', `alert-${status}`, justDefended.indexOf(threat.id) !== -1 && 'just-defended') }, [
         button(threat.name, function () { goTo(threat.id, 'learn'); }, {
           className: 'threat-card',
           key: `open-${threat.id}`,
           children: [
             iconBox(threat.icon),
-            el('span', { className: 'threat-card-text' }, [
-              el('span', { className: 'threat-card-name', text: threat.name }),
-              el('span', { className: 'alert-meta' }, [
-                el('span', { className: `severity severity-${severity.id}`, text: severity.label }),
-                el('span', { className: `status status-${status}` }, [
-                  el('span', { className: 'status-light', 'aria-hidden': 'true' }),
-                  STATUS_LABELS[status]
-                ])
-              ])
-            ])
+            el('span', { className: 'threat-card-text' }, details)
           ]
         })
       ]);
@@ -899,7 +923,7 @@ function renderDashboard() {
   ]);
 
   main.appendChild(el('div', { className: 'dashboard' }, [
-    el('div', { className: 'dashboard-body' }, [alerts, map])
+    el('div', { className: classes('dashboard-body', allStopped && 'is-recap') }, [alerts, map])
   ]));
 }
 
@@ -1053,7 +1077,7 @@ function renderPhishing(fx) {
       const key = `email-${p}-${i}`;
       const isFound = Boolean(part.clue) && found.indexOf(part.clue) !== -1;
       return button(part.text, function () { checkEmailPart(part, key); }, {
-        className: classes('email-part', part.strong && 'is-strong', part.link && 'is-link', part.block && 'is-block', isFound && 'is-found'),
+        className: classes('email-part', part.link && 'is-link', part.block && 'is-block', isFound && 'is-found'),
         fxClass: fx.shake === key ? 'shake' : null,
         key: key,
         children: [
@@ -1092,9 +1116,10 @@ function renderPhishing(fx) {
   let feedbackChildren;
   let tone = null;
   if (state.lastClue === 'none') {
+    tone = 'bad';
     feedbackChildren = [
-      el('h2', { className: 'feedback-title', text: 'Look closer' }),
-      el('p', { text: 'This part of the email looks normal. Keep looking for details that seem off.' })
+      el('h2', { className: 'feedback-title' }, [icon('x', 'title-icon'), 'Not quite']),
+      el('p', { text: 'This part looks normal. Keep checking.' })
     ];
   } else if (state.lastClue) {
     const clue = CLUES[state.lastClue];
@@ -1108,7 +1133,7 @@ function renderPhishing(fx) {
   } else {
     feedbackChildren = [
       el('h2', { className: 'feedback-title' }, [icon('search', 'title-icon'), 'Threat analysis']),
-      el('p', { text: `Find the ${CLUE_COUNT} red flags. Click any part of the email that looks wrong.` })
+      el('p', { text: 'Select parts of the email to look for signs of phishing.' })
     ];
   }
 
@@ -1126,7 +1151,7 @@ function checkEmailPart(part, key) {
     state.lastClue = 'none';
     state.fx = { shake: key };
     render();
-    announce('Look closer. This part of the email looks normal.');
+    announce('Not quite. This part looks normal. Keep checking.');
     return;
   }
   if (state.cluesFound.indexOf(part.clue) === -1) state.cluesFound.push(part.clue);
@@ -1157,8 +1182,6 @@ function renderPasswords(fx) {
     ]);
   }));
 
-  const intro = el('p', { className: 'side-intro', text: 'These three password-cracking methods are commonly used by attackers. Click a method to see how it works and why it’s dangerous.' });
-
   const method = PASSWORD_METHODS.filter(function (m) { return m.id === state.selectedMethod; })[0];
   const animate = Boolean(method) && fx.crack === method.id && !prefersReducedMotion();
   const allTested = state.methodsViewed.length === PASSWORD_METHODS.length;
@@ -1171,9 +1194,11 @@ function renderPasswords(fx) {
     const terminal = el('div', { className: 'terminal' }, [
       el('p', { className: 'terminal-label', text: 'Employee account password' }),
       el('p', { className: classes('terminal-field', !animate && 'is-cracked', justCracked && 'stamp-in'), id: 'crack-field', 'aria-hidden': 'true', text: animate ? run.guesses[0] : cracked }),
-      el('p', { className: classes('terminal-status', !animate && 'is-cracked', justCracked && 'stamp-in') },
-        animate ? [icon('search', 'chip-icon'), 'Cracking…'] : [icon('unlock', 'chip-icon'), 'Password cracked']),
-      animate ? null : el('p', { className: 'terminal-time', text: `Time to crack: ${run.time}` })
+      el('div', { className: 'terminal-row' }, [
+        el('p', { className: classes('terminal-status', !animate && 'is-cracked', justCracked && 'stamp-in') },
+          animate ? [icon('search', 'chip-icon'), 'Cracking…'] : [icon('unlock', 'chip-icon'), 'Password cracked']),
+        animate ? null : el('p', { className: 'terminal-time', text: `Time to crack: ${run.time}` })
+      ])
     ]);
 
     detail = [terminal];
@@ -1181,9 +1206,8 @@ function renderPasswords(fx) {
       detail = detail.concat([
         el('h2', { className: classes('crack-title', justCracked && 'pop-in'), text: method.name }),
         el('p', { text: method.how }),
-        el('h3', { text: 'Consequence' }),
-        el('p', { text: method.consequence }),
-        el('h3', { text: 'Best defense' }),
+        el('p', null, [el('strong', { className: 'inline-label', text: 'Consequence:' }), ` ${method.consequence}`]),
+        el('h3', { text: 'What makes the attack harder' }),
         list(method.defense)
       ]);
     }
@@ -1200,10 +1224,9 @@ function renderPasswords(fx) {
   main.appendChild(el('div', { className: 'split split-narrow-first' }, [
     el('div', { className: 'side' }, [
       el('h2', { className: 'panel-heading', text: 'Password-cracking methods' }),
-      intro,
       methods,
       allTested ? el('p', { className: 'done-note', text: 'You tested all three methods.' }) : null,
-      allTested ? nextStepButton('Explore defenses against weak passwords') : null
+      allTested ? nextStepButton('Choose the best defense') : null
     ]),
     renderFeedback(detail, method ? 'bad' : null)
   ]));
@@ -1244,6 +1267,9 @@ function selectMethod(id) {
 }
 
 /* Default credentials */
+
+// No check mark: the chip marks the student's pick, not whether it was right.
+const YOUR_ANSWER_CHIP = { text: 'Your answer', hidden: true };
 
 function renderCredentials(fx) {
   const device = DEVICES.filter(function (d) { return d.id === state.deviceId; })[0];
@@ -1296,14 +1322,14 @@ function renderCredentials(fx) {
       className: 'verdict-btn verdict-secure',
       key: 'verdict-secure',
       pressed: answer === 'secure',
-      chip: selectedChip(answer === 'secure', 'Your call'),
+      chip: answer === 'secure' ? YOUR_ANSWER_CHIP : null,
       children: [icon('check'), 'Secure']
     }),
     button('Not Secure', function () { answerDevice('notSecure'); }, {
       className: 'verdict-btn verdict-not-secure',
       key: 'verdict-not-secure',
       pressed: answer === 'notSecure',
-      chip: selectedChip(answer === 'notSecure', 'Your call'),
+      chip: answer === 'notSecure' ? YOUR_ANSWER_CHIP : null,
       children: [icon('x'), 'Not Secure']
     })
   ]);
@@ -1324,12 +1350,12 @@ function renderCredentials(fx) {
   if (!answer) {
     feedback = renderFeedback([
       el('h2', { className: 'feedback-title' }, [icon('search', 'title-icon'), `Audit: ${device.name}`]),
-      el('p', { text: device.risk || 'Decide whether these credentials are secure or not.' })
+      el('p', { text: device.risk })
     ]);
   } else {
     const correct = (answer === 'secure') === device.secure;
     const children = [
-      el('h2', { className: 'feedback-title' }, [icon(correct ? 'check' : 'x', 'title-icon'), correct ? 'Correct!' : 'Incorrect!']),
+      el('h2', { className: 'feedback-title' }, [icon(correct ? 'check' : 'x', 'title-icon'), correct ? 'That’s right!' : 'Not quite']),
       el('p', { className: 'feedback-lead', text: device.verdictTitle }),
       el('p', { text: device.verdict })
     ];
@@ -1342,7 +1368,7 @@ function renderCredentials(fx) {
         children.push(button('Audit another device', function () { selectDevice(next.id); }, { className: 'btn btn-primary', key: 'next-device' }));
       } else {
         children.push(el('p', { className: 'done-note', text: 'You audited all three devices.' }));
-        children.push(nextStepButton('Explore defenses against default credentials'));
+        children.push(nextStepButton('Choose the best defense'));
       }
     } else {
       children.push(button('See what happens next', showDeviceOutcome, { className: 'btn btn-primary', key: 'show-outcome' }));
@@ -1369,7 +1395,7 @@ function answerDevice(answer) {
   state.fx = { verdict: true };
   render();
   const correct = (answer === 'secure') === device.secure;
-  announce(`${correct ? 'Correct!' : 'Incorrect!'} ${device.verdictTitle}. ${device.verdict}`);
+  announce(`${correct ? 'That’s right!' : 'Not quite.'} ${device.verdictTitle}. ${device.verdict}`);
 }
 
 function showDeviceOutcome() {
@@ -1472,7 +1498,8 @@ function renderSocial(fx) {
     const children = [
       el('h2', { className: 'feedback-title' }, [icon('spy', 'title-icon'), 'Your attack']),
       renderAttackPath(s, fx),
-      el('p', { className: 'strategy-note' }, [el('strong', { text: STRATEGIES[s.strategy].label }), `: ${STRATEGIES[s.strategy].text}`])
+      // Once an outcome shows, the strategy explanation (already read and announced) makes room for it.
+      s.outcome ? null : el('p', { className: 'strategy-note' }, [el('strong', { text: STRATEGIES[s.strategy].label }), `: ${STRATEGIES[s.strategy].text}`])
     ];
     if (s.outcome) {
       // The result replaces the scenario and outcome choice so the panel fits without scrolling.
@@ -1489,17 +1516,14 @@ function renderSocial(fx) {
           key: 'outcome-other',
           ariaLabel: `See the outcome with ${labels[other]}`
         }),
-        button('Try another attack type', function () {
-          state.social = { attack: null, target: null, strategy: null, outcome: null };
-          render();
-          const first = document.querySelector('[data-key="attack-phishing"]');
-          if (first) first.focus();
-        }, { className: 'btn', key: 'restart-social' }),
         nextStepButton('Choose the best defense')
       ]));
     } else {
       children.push(el('p', { text: scenario.text }));
-      children.push(el('p', { className: 'feedback-lead', text: 'Choose an outcome based on the strength of the security awareness training at the company.' }));
+      children.push(el('p', {
+        className: 'feedback-lead',
+        text: scenario.physical ? 'How strong are the company’s physical security policies?' : 'How strong is the company’s security training?'
+      }));
       children.push(el('div', { className: 'outcome-row' }, ['strong', 'weak'].map(function (level) {
         return button(labels[level], function () { chooseOutcome(level, labels[level], scenario[level]); }, {
           className: `outcome-btn outcome-${level}`,
@@ -1564,10 +1588,10 @@ function renderMitigation(threat, fx) {
     const children = [
       option.correct
         ? banner('good', 'shield', 'Defense deployed', fx.defense && 'deploy')
-        : banner('bad', 'alert', 'Attack got through', fx.defense && 'stamp-in'),
+        : banner('bad', 'alert', 'Didn’t stop the attack', fx.defense && 'stamp-in'),
       el('h2', { className: 'feedback-title' }, [
         icon(option.correct ? 'check' : 'x', 'title-icon'),
-        option.correct ? 'That’s right!' : 'Not quite!'
+        option.correct ? 'That’s right!' : 'Not quite'
       ]),
       el('p', { className: 'feedback-lead', text: option.label })
     ];
@@ -1612,7 +1636,7 @@ function chooseDefense(threat, index) {
   render();
   announce(option.correct
     ? `Defense deployed. That’s right! ${option.label}. Network integrity: ${PERCENT.format(defendedRatio())}.`
-    : `Attack got through. Not quite! ${option.label}.`);
+    : `Didn’t stop the attack. ${option.label}.`);
 }
 
 try {
