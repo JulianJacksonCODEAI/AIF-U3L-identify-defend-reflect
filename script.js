@@ -27,7 +27,7 @@ const THREATS = [
     ],
     defense: {
       title: 'Defend against phishing attacks',
-      question: 'Several measures help. Which one best stops phishing?',
+      question: 'Several defenses help. Which one best stops phishing?',
       recap: 'Phishing tricks people, so trained people are the best defense.',
       options: [
         {
@@ -77,8 +77,8 @@ const THREATS = [
     ],
     defense: {
       title: 'Defend against password attacks',
-      question: 'Several measures help. Which one best stops password attacks?',
-      recap: 'Long, unique passwords defeat guessing and cracking tools.',
+      question: 'Several defenses help. Which one best stops password attacks?',
+      recap: 'Long, unique passwords are hard to guess or crack with software.',
       options: [
         {
           label: 'Regular Software Updates',
@@ -127,8 +127,8 @@ const THREATS = [
     ],
     defense: {
       title: 'Defend against default credentials',
-      question: 'Several measures help. Which one best stops default credential attacks?',
-      recap: 'Factory passwords are public, so every device needs its own.',
+      question: 'Several defenses help. Which one best stops default credential attacks?',
+      recap: 'Default passwords are public, so every device needs its own.',
       options: [
         {
           label: 'Encrypted Data',
@@ -177,7 +177,7 @@ const THREATS = [
     ],
     defense: {
       title: 'Defend against social engineering',
-      question: 'Several measures help. Which one best stops social engineering?',
+      question: 'Several defenses help. Which one best stops social engineering?',
       recap: 'Training helps people check who is asking before they share.',
       options: [
         {
@@ -1133,7 +1133,7 @@ function renderPhishing(fx) {
   } else {
     feedbackChildren = [
       el('h2', { className: 'feedback-title' }, [icon('search', 'title-icon'), 'Threat analysis']),
-      el('p', { text: 'Select any part of the email to check it.' })
+      el('p', { text: 'Select parts of the email to look for signs of phishing.' })
     ];
   }
 
@@ -1207,7 +1207,7 @@ function renderPasswords(fx) {
         el('h2', { className: classes('crack-title', justCracked && 'pop-in'), text: method.name }),
         el('p', { text: method.how }),
         el('p', null, [el('strong', { className: 'inline-label', text: 'Consequence:' }), ` ${method.consequence}`]),
-        el('h3', { text: 'What makes it harder' }),
+        el('h3', { text: 'What makes the attack harder' }),
         list(method.defense)
       ]);
     }
@@ -1522,7 +1522,7 @@ function renderSocial(fx) {
       children.push(el('p', { text: scenario.text }));
       children.push(el('p', {
         className: 'feedback-lead',
-        text: scenario.physical ? 'How strong are the company’s physical security rules?' : 'How strong is the company’s security training?'
+        text: scenario.physical ? 'How strong are the company’s physical security policies?' : 'How strong is the company’s security training?'
       }));
       children.push(el('div', { className: 'outcome-row' }, ['strong', 'weak'].map(function (level) {
         return button(labels[level], function () { chooseOutcome(level, labels[level], scenario[level]); }, {
